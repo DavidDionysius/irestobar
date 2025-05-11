@@ -41,9 +41,10 @@ $affiche = "<div id='formulaire_modifier'>
                         }
                     $affiche .= "</select>
                 </div>
-                <div id='cont_emballage'>
+                <div id='cont_emballage_modifier'>
                     <label for='' id='alignement_droit'>Emballage : </label>
-                    <div id='liste_emballage_modifier'>";
+                    <div id='liste_emballage_modifier'>
+                        <label id='label_sans_emballage'><input type='checkbox' value='0' class='sans_emballage_modifier'  /> Sans emballage</label>";
                         $tab_emballage = explode(",", $id_emballage);   //TRANSFORMER EN array LE $id_emballage
 
                         // SELECTIONNER TOUS LES emballages DANS le $id_categorie

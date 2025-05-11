@@ -24,6 +24,9 @@
             let etat_sans_emballage = $("input[class='sans_emballage']").prop("checked"); //VERIFIER SI LA CASE EST COCHEE OU PAS
             if(etat_sans_emballage == true){
                 $("input[class='emballage']").prop('disabled', true)
+                $(".champ_unite").val("")
+                $(".emballage").prop("checked", false)  //DECOCHER LES checkbox DE L'EMBALLAGE
+                $(".unite_par_emballage").hide()
             }else{
                 $("input[class='emballage']").prop('disabled', false)
             }

@@ -100,6 +100,14 @@
         justify-content: center;
     }
 
+    #cont_emballage_modifier{
+        display: flex;
+        justify-content: center;
+        height: 300px;
+        overflow-y: auto;
+        padding-top: 100px;
+    }
+
     #liste_emballage, #liste_emballage_modifier{
         display: flex;
         flex-direction: column;
@@ -112,9 +120,10 @@
         margin-bottom: 10px;
     }
 
-    #sans_emballage{
+    #label_sans_emballage{
         font-style: italic;
         font-weight: bold;
+        margin-bottom: 10px;
     }
 
     .unite_par_emballage{
