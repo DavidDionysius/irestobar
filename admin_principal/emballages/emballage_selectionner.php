@@ -122,6 +122,8 @@ for($i = 0; $i < $nb_tab; $i++){
             if($nb_unite_2 > 0){
                 $second_id_unite = $tab_unite_2[0]['id'];
                 $second_nom_unite = $tab_unite_2[0]['nom_unite'];
+            }else{
+                $second_nom_unite = "";
             }
 
             $reponse .= "<tr>
@@ -145,8 +147,8 @@ for($i = 0; $i < $nb_tab; $i++){
                         $reponse .= "<tr>
                                         <td class='espace_gauche'>{$nom_unite_2}</td>
                                         <td id='td_nom' class='td_btn_unite'>
-                                            <button id='modifier_unite' data-idunite='{$id_unite_2}' data-nomunite='$nom_unite_2'>MODIFIER</button>
-                                            <button id='supprimer_unite' data-idunite='{$id_unite_2}' data-nomunite='$nom_unite_2'>SUPPRIMER</button>
+                                            <button id='modifier_unite' data-idunite='{$id_unite_2}' data-nomunite='{$nom_unite_2}'>MODIFIER</button>
+                                            <button id='supprimer_unite' data-idunite='{$id_unite_2}' data-nomunite='{$nom_unite_2}'>SUPPRIMER</button>
                                         </td>
                                     </tr>";
                     }

@@ -103,9 +103,9 @@
     #cont_emballage_modifier{
         display: flex;
         justify-content: center;
-        height: 300px;
+        height: 250px;
         overflow-y: auto;
-        padding-top: 100px;
+        padding-top: 120px;
     }
 
     #liste_emballage, #liste_emballage_modifier{
@@ -137,7 +137,7 @@
         justify-content: flex-start;
     }
 
-    .champ_unite{
+    .champ_unite, .champ_unite_modifier{
         width: 125px;
         height: 20px;
         border-radius: 7px;

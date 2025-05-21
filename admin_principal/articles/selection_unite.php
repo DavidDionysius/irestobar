@@ -17,7 +17,8 @@ for($i_unite = 0; $i_unite < $nb_unite; $i_unite++){
     $id_unite = $tab_unite[$i_unite]["id"];
     $nom_unite = $tab_unite[$i_unite]["nom_unite"];
     $reponse .= "<div id='cont_chaque_unite'>
-                    <label id='label_unite'>{$nom_unite} : </label> <input type='number' data-idunite='{$id_unite}' class='champ_unite unite_{$id_emballage}'>
+                    <label id='label_unite'>{$nom_unite} : </label>
+                    <input type='number' data-idunite='{$id_unite}' class='champ_unite unite_{$id_emballage}'>
                 </div>";
 }
 

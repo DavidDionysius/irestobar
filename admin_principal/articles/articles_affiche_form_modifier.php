@@ -16,8 +16,8 @@ $quantite_unites = $tab_categorie["quantite_unites"];
 $affiche = "<div id='formulaire_modifier'>
                 <button id='fermer_modification'>X</button>
                 <div>
-                    <label for='' id='alignement_droit'>Nom de la categorie : </label>
-                    <input type='text' id='categorie_modifier' value='{$nom_article}' />
+                    <label for='' id='alignement_droit'>Nom de l'article : </label>
+                    <input type='text' id='article_modifier' value='{$nom_article}' />
                 </div>
 
                 <div>
@@ -60,9 +60,9 @@ $affiche = "<div id='formulaire_modifier'>
                             
                             $affiche .= "<label>";
                                             if(in_array($id_emballage_selectionne, $tab_emballage)){
-                                                $affiche .= "<input type='checkbox' value='{$id_emballage}' checked>";
+                                                $affiche .= "<input type='checkbox' data-idarticle='{$id_article}' value='{$id_emballage_selectionne}' class='emballage_modifier' checked> ";
                                             }else{
-                                                $affiche .= "<input type='checkbox' value='{$id_emballage}'> ";
+                                                $affiche .= "<input type='checkbox' data-idarticle='{$id_article}' value='{$id_emballage_selectionne}' class='emballage_modifier'> ";
                                             }
                                             $affiche .= "{$nom_emballage_selectionne}
                                         </label>";
@@ -78,36 +78,41 @@ $affiche = "<div id='formulaire_modifier'>
 
                                             $tab_unite_dans_emballage = explode("/", $partie_unite);
 
-                                            for($i_unite = 0; $i_unite < count($tab_slct_unite); $i_unite++){
-                                                $id_unite = $tab_slct_unite[$i_unite]["id"];
-                                                $nom_unite = $tab_slct_unite[$i_unite]["nom_unite"];
-                                                
-                                                $tab_unite_selectionne = [];    //TABLEAU VIDE POUR STOCKER LES id DE L'unite DANS emballage
-                                                for($i_unite_dans_emballage = 0; $i_unite_dans_emballage < count($tab_unite_dans_emballage); $i_unite_dans_emballage++){
-                                                    $id_et_qte_unite = $tab_unite_dans_emballage[$i_unite_dans_emballage];
-                                                    $tab_id_qte_unite = explode(":", $id_et_qte_unite);
-                                                    $id_unite_dans_emballage = $tab_id_qte_unite[0];
-                                                    $qte_unite_dans_emballage = $tab_id_qte_unite[1];
+                                            // CONTENEUR POUR L'ENSEMBLE D'unite DANS emballage
+                                            $affiche .= "<section class='unite_par_emballage_modifier' id='unite_par_emballage_modifier_{$id_emballage_selectionne}'>";
+                                                for($i_unite = 0; $i_unite < count($tab_slct_unite); $i_unite++){
+                                                    $id_unite = $tab_slct_unite[$i_unite]["id"];
+                                                    $nom_unite = $tab_slct_unite[$i_unite]["nom_unite"];
+                                                    
+                                                    $tab_unite_selectionne = [];    //TABLEAU VIDE POUR STOCKER LES id DE L'unite DANS emballage
+                                                    for($i_unite_dans_emballage = 0; $i_unite_dans_emballage < count($tab_unite_dans_emballage); $i_unite_dans_emballage++){
+                                                        $id_et_qte_unite = $tab_unite_dans_emballage[$i_unite_dans_emballage];
+                                                        $tab_id_qte_unite = explode(":", $id_et_qte_unite);
+                                                        $id_unite_dans_emballage = $tab_id_qte_unite[0];
+                                                        $qte_unite_dans_emballage = $tab_id_qte_unite[1];
 
-                                                    $tab_unite_selectionne[$i_unite_dans_emballage] = $id_unite_dans_emballage;
+                                                        $tab_unite_selectionne[$i_unite_dans_emballage] = $id_unite_dans_emballage;
+                                                    }
+
+                                                    $affiche .= "<div id='cont_unite_mod'>
+                                                                    <label>{$nom_unite} : </label>";
+                                                                    if(in_array($id_unite, $tab_unite_selectionne)){
+                                                                        $index_unite = array_search($id_unite, $tab_unite_selectionne);
+
+                                                                        $id_qte_unite_2 = $tab_unite_dans_emballage[$index_unite];
+                                                                        $tab_id_qte_unite_2 = explode(":", $id_qte_unite_2);
+                                                                        $id_unite_2 = $tab_id_qte_unite_2[0];
+                                                                        $qte_unite_2 = $tab_id_qte_unite_2[1];
+                                                                        $affiche .= "<input type='number' data-idunite='{$id_unite}' class='champ_unite_modifier unite_modifier_{$id_emballage_selectionne}' value='{$qte_unite_2}' />";
+                                                                    }else{
+                                                                        $affiche .= "<input type='number' data-idunite='{$id_unite}' class='champ_unite_modifier unite_modifier_{$id_emballage_selectionne}' />";
+                                                                    }
+                                                                    
+                                                    $affiche .= "</div>";
                                                 }
-
-                                                $affiche .= "<div id='cont_unite_mod'>
-                                                                <label>{$nom_unite} : </label>";
-                                                                if(in_array($id_unite, $tab_unite_selectionne)){
-                                                                    $index_unite = array_search($id_unite, $tab_unite_selectionne);
-
-                                                                    $id_qte_unite_2 = $tab_unite_dans_emballage[$index_unite];
-                                                                    $tab_id_qte_unite_2 = explode(":", $id_qte_unite_2);
-                                                                    $id_unite_2 = $tab_id_qte_unite_2[0];
-                                                                    $qte_unite_2 = $tab_id_qte_unite_2[1];
-                                                                    $affiche .= "<input type='number' value='{$qte_unite_2}' />";
-                                                                }else{
-                                                                    $affiche .= "<input type='number' />";
-                                                                }
-                                                                
-                                                $affiche .= "</div>";
-                                            }
+                                            $affiche .= "</section>";
+                                        }else{
+                                            $affiche .= "<section class='unite_par_emballage_modifier' id='unite_par_emballage_modifier_{$id_emballage_selectionne}'></section>";
                                         }
                         }
                     $affiche .= "
